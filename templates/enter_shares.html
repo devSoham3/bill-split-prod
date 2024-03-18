@@ -1,45 +1,69 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Enter Shares</title>
+    <title>Bill Split: Enter Shares</title>
     <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='White logo - no background no name.png') }}"
+        type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='White logo - no background no name.png') }}"
+        type="image/x-icon">
 </head>
+
 <body>
+    <div class="nav">
+        <a href="/">Bill Split »</a> <span class="current">Enter Shares »</span> <a href="#">Bill Summary</a>
+    </div>
     <h1>Enter Shares</h1>
     <form method="POST" action="/enter_shares">
         <!-- Hidden inputs for passing participants and items as JSON strings -->
         {% for participant in participants %}
         <input type="hidden" name="participant_names[]" value="{{ participant }}">
         {% endfor %}
-        
+
         <input type="hidden" name="items_json" value="{{ items | tojson | safe }}">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Items / Participants</th>
-                    {% for participant in participants %}
-                    <th>{{ participant }}</th>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Participants →<br>↓ Items</th>
+                        {% for participant in participants %}
+                        <th>{{ participant }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.name }} [{{ item.cost }}]</td>
+                        {% for participant in participants %}
+                        <td>
+                            <input type="number" name="{{ participant }}_{{ item.name }}" step="0.01" value="0" min="0"
+                                max="1">
+                        </td>
+                        {% endfor %}
+                    </tr>
                     {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr>
-                    <td>{{ item.name }}</td>
-                    {% for participant in participants %}
-                    <td>
-                        <input type="number" name="{{ participant }}_{{ item.name }}" step="0.01" value="0" min="0" max="1">
-                    </td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <input type="submit" value="Calculate Bill">
+                </tbody>
+            </table>
+        </div>
+
+                <div class="buttons-container">
+                    <input type="submit" value="» Calculate Bill">
+                </div>
     </form>
-    <form method="GET" action="/">
-        <button type="submit">Back</button>
+    <form method="GET" action="/" class="just-button">
+        <div class="buttons-container">
+            <button type="submit">« Back</button>
+        </div>
     </form>
+    <!-- Footer -->
+    <footer>
+        <p>Like this app? View my portfolio too!</p>
+        <a href="https://www.sohamdeo.com/" target="_blank">sohamdeo.com</a>
+    </footer>
 </body>
+
 </html>

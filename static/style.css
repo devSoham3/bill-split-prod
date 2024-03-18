@@ -19,9 +19,13 @@ h1, h2 {
     margin-bottom: 20px;
 }
 
+h1 {
+    color: #4a86e8;
+}
+
 form {
-    background-color: #fff; /* Form background white */
-    color: #000; /* Form text color black */
+    background-color: #000; /* Form background white */
+    color: #fff; /* Form text color black */
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -47,6 +51,7 @@ input[type="submit"], button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    justify-content: center; /* Center the buttons horizontally */
 }
 
 input[type="submit"]:hover, button:hover {
@@ -54,19 +59,109 @@ input[type="submit"]:hover, button:hover {
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+
+    width: 90%;
+    border-collapse: separate; /* Turn off collapsing borders */
+    border-spacing: 0; /* Remove default spacing */
+
+    /*width: 90%; 
+    border-collapse: collapse;*/
+    margin: 20px auto; /* shorthand for top/bottom 20px, left/right auto */
+    border-radius: 8px;
 }
 
 th, td {
-    text-align: left;
+    border: 1px solid #ddd;
+
+    text-align: center;
     padding: 8px;
     border-bottom: 1px solid #ddd;
     background-color: #fff; /* Table background white */
     color: #000; /* Table text color black */
 }
 
+.table-container {
+    overflow: hidden; /* Ensures the border-radius clips the content */
+    border-radius: 8px; /* Example radius, adjust as needed */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: adds a shadow for better visibility */
+}
+
 button.space-below {
     margin-bottom: 20px; /* Adjust the value as needed */
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 10px; /* Add some space between the buttons */
+    margin: 20px 0; /* Add some vertical space around the container */
+}
+
+/* Optional: Ensure buttons have the same width for visual consistency */
+.buttons-container button {
+    flex: 'auto'; /* This makes the buttons share the container space equally */
+}
+
+@media screen and (max-width: 200px) {
+    table {
+        overflow-x: auto;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    input[type="text"], input[type="number"], input[type="submit"], button {
+        width: 100%; /* Make input fields take the full width */
+        margin: 5px 0; /* Add some space between the elements */
+    }
+
+    form {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        margin: 10px; /* Reduce the body margin on smaller screens */
+    }
+
+    h1, h2 {
+        font-size: 1.5em; /* Adjust headings to be slightly smaller */
+    }
+}
+
+/* Breadcrumb Navigation */
+.nav {
+    display: flex; /* Use Flexbox */
+    justify-content: flex-end; /* Align items to the right */
+    margin-bottom: 20px;
+}
+
+.nav a, .nav span {
+    color: #fff; /* Default text color */
+    text-decoration: none;
+    margin-left: 10px; /* Right alignment */
+    font-size: 0.75em; /* Smaller font size */
+}
+
+.nav span.current {
+    color: #4a86e8; /* Accent color for the current page */
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    background-color: #4a86e8;
+    color: #000; /* White text color */
+}
+
+footer a {
+    color: #000; /* Use the accent color for links */
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }

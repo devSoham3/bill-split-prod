@@ -2,37 +2,58 @@
 <html>
 
 <head>
-    <title>Bill Summary</title>
+    <title>Bill Split: Bill Summary</title>
     <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='White logo - no background no name.png') }}"
+        type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='White logo - no background no name.png') }}"
+        type="image/x-icon">
 </head>
 
 <body>
+    <div class="nav">
+        <a href="/">Bill Split »</a> <a href="javascript:history.back()">Enter Shares »</a> <span class="current">Bill
+            Summary</span>
+    </div>
     <h1>Bill Summary</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Participant</th>
-                <th>Share</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for person, share in person_shares.items() %}
-            <tr>
-                <td>{{ person }}</td>
-                <td>{{ share|round(2) }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <form style="display: block;">
 
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Participant</th>
+                        <th>Share</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for person, share in person_shares.items() %}
+                    <tr>
+                        <td>{{ person }}</td>
+                        <td>{{ share|round(2) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </form>
     <div id="total_bill_summary">
         <h2>Original Total: {{ total_bill|round(2) }}</h2>
         <h2>Shares Total: {{ shares_total|round(2) }}</h2>
     </div>
 
     <form method="GET" action="/">
-        <button type="submit">New Bill?</button>
+        <div class="buttons-container">
+            <button type="submit">↺ New Bill?</button>
+        </div>
     </form>
+    <!-- Footer -->
+    <footer>
+        <p>Like this app? View my portfolio too!</p>
+        <a href="https://www.sohamdeo.com/" target="_blank">sohamdeo.com</a>
+    </footer>
 </body>
 
 </html>
