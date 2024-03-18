@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bill Split</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <h1>Bill Split</h1>
+    <h2>Enter items below:</h2>
+
+    <form method="POST" action="/finalize_items">
+        <label for="participants">Participants (comma-separated):</label>
+        <input type="text" name="participants" required><br><br>
+
+        <div id="item_fields">
+            <div class="item_field">
+                <label for="item_name">Item Name:</label>
+                <input type="text" name="item_name[]" required>
+                <label for="item_cost">Item Cost:</label>
+                <input type="number" name="item_cost[]" step="0.01" min="0" required>
+                <br><br>
+            </div>
+        </div>
+
+        <button type="button" id="add_item">Add Item</button>
+        <br><br>
+
+        <button type="button" id="remove_last_item">Remove Last Item</button>
+        <br><br>
+
+        <input type="submit" value="Enter shares">
+    </form>
+
+    <p>Total Cost: <span id="total_cost">0</span></p>
+
+    <script>
+        function updateTotalCost() {
+        var itemCostInputs = document.querySelectorAll('input[name="item_cost[]"]');
+        var totalCost = 0;
+        itemCostInputs.forEach(function(input) {
+            var cost = parseFloat(input.value) || 0;
+            totalCost += cost;
+        });
+        document.getElementById("total_cost").textContent = totalCost.toFixed(2);
+    }
+
+    document.getElementById("add_item").addEventListener("click", function () {
+        var itemField = document.createElement("div");
+        itemField.className = "item_field";
+        itemField.innerHTML = `
+        <label for="item_name">Item Name:</label>
+        <input type="text" name="item_name[]" required>
+        <label for="item_cost">Item Cost:</label>
+        <input type="number" name="item_cost[]" step="0.01" min="0" required>
+        <br><br>
+    `;
+        document.getElementById("item_fields").appendChild(itemField);
+
+        // Add event listener to the newly added item cost input
+        itemField.querySelector('input[name="item_cost[]"]').addEventListener("input", updateTotalCost);
+
+        // Update total cost
+        updateTotalCost();
+    });
+
+    document.getElementById("remove_last_item").addEventListener("click", function () {
+        var itemFields = document.getElementById("item_fields");
+        var lastItemField = itemFields.lastElementChild;
+        if (lastItemField && itemFields.childElementCount > 1) { // Ensure there's at least one item field
+            itemFields.removeChild(lastItemField);
+            // Update total cost after removal
+            updateTotalCost();
+        }
+    });
+
+    // Initial event listeners for existing item cost inputs
+    document.querySelectorAll('input[name="item_cost[]"]').forEach(input => {
+        input.addEventListener("input", updateTotalCost);
+    });
+
+    // Initial calculation of total cost
+    updateTotalCost();
+    </script>
+</body>
+
+</html>

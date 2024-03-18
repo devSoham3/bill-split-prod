@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter Shares</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Enter Shares</h1>
+    <form method="POST" action="/enter_shares">
+        <!-- Hidden inputs for passing participants and items as JSON strings -->
+        {% for participant in participants %}
+        <input type="hidden" name="participant_names[]" value="{{ participant }}">
+        {% endfor %}
+        
+        <input type="hidden" name="items_json" value="{{ items | tojson | safe }}">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Items / Participants</th>
+                    {% for participant in participants %}
+                    <th>{{ participant }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    {% for participant in participants %}
+                    <td>
+                        <input type="number" name="{{ participant }}_{{ item.name }}" step="0.01" value="0" min="0" max="1">
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" value="Calculate Bill">
+    </form>
+    <form method="GET" action="/">
+        <button type="submit">Back</button>
+    </form>
+</body>
+</html>

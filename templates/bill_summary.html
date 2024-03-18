@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bill Summary</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <h1>Bill Summary</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Participant</th>
+                <th>Share</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person, share in person_shares.items() %}
+            <tr>
+                <td>{{ person }}</td>
+                <td>{{ share|round(2) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div id="total_bill_summary">
+        <h2>Original Total: {{ total_bill|round(2) }}</h2>
+        <h2>Shares Total: {{ shares_total|round(2) }}</h2>
+    </div>
+
+    <form method="GET" action="/">
+        <button type="submit">New Bill?</button>
+    </form>
+</body>
+
+</html>

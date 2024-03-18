@@ -1,0 +1,35 @@
+{
+    "participants": [
+        {
+            "name": "Person1"
+        },
+        {
+            "name": "Person2"
+        },
+        {
+            "name": "Person3"
+        }
+    ],
+    "items": [
+        {
+            "name": "Item1",
+            "cost": 10.0
+        },
+        {
+            "name": "Item2",
+            "cost": 15.0
+        },
+        {
+            "name": "Item3",
+            "cost": 12.5
+        },
+        {
+            "name": "TAX",
+            "cost": 2.5
+        },
+        {
+            "name": "TIP",
+            "cost": 8.0
+        }
+    ]
+}
