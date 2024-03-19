@@ -1,2 +1,2 @@
 # BillSplit-stateless
-Stateless implementation of the BillSplit application for much better deployment to the web.
+Source code for the web application to split bills unevenly, impemented on [billsplit.sohamdeo.com](billsplit.sohamdeo.com).
