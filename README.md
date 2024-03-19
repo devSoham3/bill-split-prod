@@ -4,7 +4,7 @@ Source code for the web application to split bills unevenly, impemented on [bill
 ## Project Structure
 ```
 bill-split-prod
-│   .dockerignore                                  --> dockeringnore for Docker build
+│   .dockerignore                                  --> dockerignore for Docker build
 │   .gitignore
 │   app.py                                         --> Logic for operation using Flask
 │   Dockerfile                                     --> Dockerfile for containerization
@@ -24,6 +24,7 @@ bill-split-prod
 1. Install Docker
 2. Build container using: `docker build -t <container-name> .`
 3. Run container using `docker run -p <localhost-port>:80 <container-name>`
+4. Go to `http://localhost:<localhost-port>/` to view and use application
 
 ## Web Applicaition
 The web app is deployed via Google Cloud Run, continuous deployment is enabled with revision builds on new pushes for this repo. The build uses Dockerfile for container builds.
