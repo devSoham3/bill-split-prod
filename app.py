@@ -1,5 +1,4 @@
-import json
-from flask import Flask, render_template, request, redirect, url_for, jsonify, session
+from flask import Flask, render_template, request, redirect, url_for, session
 
 app = Flask(__name__)
 app.secret_key = 'split_your_bills_t0_pay_your_bills!' 
