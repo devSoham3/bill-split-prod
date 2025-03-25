@@ -20,7 +20,12 @@ bill-split-prod
         enter_shares.html
         index.html
 ```
-## Local Usage
+## Local Usage (Using Flask)
+1. Install required packages from requirements.txt.
+2. Run app.py.
+3. View application using instructions from Flask.
+
+## Local Usage (Using Docker)
 1. Install Docker
 2. Build container using: `docker build -t <container-name> .`
 3. Run container using `docker run -p <localhost-port>:80 <container-name>`
