@@ -1,4 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+import os
+
+def load_env(filepath='.env'):
+    try:
+        with open(filepath) as f:
+            for line in f:
+                if line.strip() and not line.startswith('#'):
+                    key, value = line.strip().split('=', 1)
+                    os.environ[key] = value
+    except FileNotFoundError:
+        print(f"⚠️  Warning: '{filepath}' not found. Using default secret key.")
+
+# Load .env if possible
+load_env()
+
+# Use environment variable if available, else fallback
+secret_key = os.environ.get('SECRET_KEY', 'default_key_please_change')
+
+if secret_key == 'default_key_please_change':
+    print("⚠️  Warning: Using default secret key! Please set a proper SECRET_KEY in your .env file.")
 
 app = Flask(__name__)
 app.secret_key = 'split_your_bills_t0_pay_your_bills!' 
